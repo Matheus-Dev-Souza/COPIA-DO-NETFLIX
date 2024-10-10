@@ -127,11 +127,77 @@ As rotas disponíveis na API são:
 
 ## 7. Configuração do chatbot no Amazon Lex, incluindo intents e slots
 
-1. **Acesse a Console do Amazon Lex** e clique em "Create bot".
-2. **Configure o bot** com nome e idioma.
-3. **Adicionar Intents**: Defina as intenções que o bot deve reconhecer.
-4. **Configurar Slots**: Para cada intenção, adicione slots necessários para capturar informações do usuário.
-5. **Adicionar Respostas**: Configure como o bot deve responder após coletar as informações.
+### Etapa 1: Criar um bot do Amazon Lex
+
+Se você ainda não tem um bot no **Amazon Lex**, siga os passos abaixo para criar e implantar um. Presumimos que você esteja usando o bot criado no **Exercício 1** dos Conceitos Básicos. No entanto, é possível usar qualquer bot de exemplo fornecido. 
+
+1. **Crie um bot** no Amazon Lex:
+   - Consulte o guia [Exercício 1: Criar um bot do Amazon Lex usando um esquema (Console)](https://docs.aws.amazon.com/lex/latest/dg/exercise1.html).
+   
+2. **Implemente o bot** e crie um alias:
+   - Consulte [Exercício 3: Publique uma versão e crie um alias](https://docs.aws.amazon.com/lex/latest/dg/exercise3.html).
+   
+---
+
+### Etapa 2: Cadastrar-se no Slack e criar uma equipe
+
+1. **Cadastre-se no Slack** e crie uma equipe:
+   - Acesse o [Slack](https://slack.com/) e siga as instruções para criar uma equipe e registrar-se em uma conta.
+   
+---
+
+### Etapa 3: Criar uma aplicação do Slack
+
+1. **Crie uma aplicação no Slack**:
+   - Faça login no [console da API do Slack](http://api.slack.com).
+   - Crie uma nova aplicação e configure-a com **mensagens interativas**. 
+
+2. **Configurações básicas do aplicativo**:
+   - No menu à esquerda, escolha **Interatividade e atalhos**.
+   - Ative os componentes interativos e insira uma URL válida como `https://slack.com`. Esse valor será atualizado posteriormente.
+   - Salve as alterações.
+
+3. **Registre as credenciais do aplicativo**:
+   - No menu **Informações básicas**, anote o **ID do cliente**, o **segredo do cliente** e o **token de verificação**. Esses valores serão usados posteriormente na integração com o Amazon Lex.
+
+---
+
+### Etapa 4: Integrar o aplicativo do Slack com o bot do Amazon Lex
+
+1. **Ative a associação de canal no Amazon Lex**:
+   - Faça login no [Console de Gerenciamento da AWS](https://console.aws.amazon.com/lex/).
+   - Selecione o bot do Amazon Lex que você criou na Etapa 1.
+   - Na aba **Canais**, escolha **Slack**.
+   - Insira as credenciais do aplicativo (ID do cliente, segredo do cliente e token de verificação) obtidas na Etapa 3.
+   
+2. **URLs de integração**:
+   - O Amazon Lex retornará duas URLs: **Postback URL** e **OAuth URL**. Anote esses valores, pois eles serão utilizados para atualizar a configuração do Slack.
+
+---
+
+### Etapa 5: Completar a integração do Slack
+
+1. **Atualize a configuração no Slack**:
+   - No [console da API do Slack](http://api.slack.com), selecione o aplicativo criado.
+   - No menu **OAuth e permissões**, adicione a **OAuth URL** fornecida pelo Amazon Lex.
+   - Na seção **Escopos do token do bot**, adicione os escopos `chat:write` e `team:read`.
+   
+2. **Atualize o URL de interatividade**:
+   - No menu **Interatividade e atalhos**, insira a **Postback URL** fornecida pelo Amazon Lex e salve as alterações.
+   
+3. **Assine os eventos necessários**:
+   - No menu **Assinaturas de eventos**, inscreva-se no evento `message.im` para habilitar mensagens diretas entre o usuário e o bot.
+
+---
+
+### Etapa 6: Testar a integração
+
+1. **Instalar o aplicativo no Slack**:
+   - No console do Slack, vá para **Manage Distribution** e clique em **Add to Slack** para instalar o aplicativo.
+   - Autorize o bot a responder a mensagens na equipe do Slack.
+   
+2. **Iniciar o bate-papo com o bot**:
+   - No Slack, encontre o bot na seção **Mensagens diretas** e inicie uma conversa para testar a integração.
 
 ---
 
