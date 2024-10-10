@@ -1,5 +1,4 @@
 
-```markdown
 # Chatbot TTS
 
 Este projeto integra o **Amazon Lex V2** para chatbot com **AWS Polly**, permitindo a conversão de texto em fala. O deploy é realizado utilizando o **Serverless Framework v4**.
